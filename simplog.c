@@ -52,6 +52,20 @@ static char* getDateString();
 static char** getPrettyBacktrace( void* addresses[], int array_size );
 static void wrapLines( char* msg, int msgSize );
 
+static void start (void) __attribute__ ((constructor));
+
+static void stop (void) __attribute__ ((destructor));
+
+static void start (void) 
+{
+	simplog.writeLog( SIMPLOG_DEBUG, "[module_start] simple logger");
+}
+
+static void stop (void) 
+{
+	simplog.writeLog( SIMPLOG_DEBUG, "[module_stop] simple logger");
+}
+
 /*
     Writes output to defined logfile and standard out/err with
     date/time stamp and associated log level.

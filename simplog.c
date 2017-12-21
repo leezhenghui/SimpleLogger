@@ -24,6 +24,7 @@
 #endif
 
 #include "simplog.h"
+#include "../../../src/calltracer.h"
 
 // Used for printing from within the logger. Prints if debug level is SIMPLOG_DEBUG or higher
 #define SIMPLOG_LOGGER  4
@@ -58,12 +59,14 @@ static void stop (void) __attribute__ ((destructor));
 
 static void start (void) 
 {
-	simplog.writeLog( SIMPLOG_DEBUG, "[module_start] simple logger");
+	printf( "[module_start] simple logger\n");
+  calltracer_on();
 }
 
 static void stop (void) 
 {
-	simplog.writeLog( SIMPLOG_DEBUG, "[module_stop] simple logger");
+	printf( "[module_stop] simple logger\n");
+	// simplog.writeLog( SIMPLOG_DEBUG, "[module_stop] simple logger");
 }
 
 /*
